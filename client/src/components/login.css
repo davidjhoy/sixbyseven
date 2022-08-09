@@ -17,4 +17,28 @@ body{
 .form{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.input{
+    width: 40% ;
+    padding: 5px, 5px, 5px, 5px;
+    height: 30px;
+    margin-bottom: 30px;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+    border-radius: 50pt;
+}
+
+.label{
+    color: white;
+    font-size: 14pt;
+    width: 40% ;
+    margin-bottom: 30px;
+    align-self: center;
+    align-content: center;
+    border-color: white;
+
 }

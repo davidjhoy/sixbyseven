@@ -8,9 +8,11 @@ const Login = () => {
     <div className = "Login-container">
         <h1>Login</h1>
         <form className = "form">
-        <input type = "text" name="username"/>
-        <input type = "type" name= "password"/>
-        <button>Login</button>
+        <label className = "label">Username</label>
+        <input type = "text" name="username" className = "input"/>
+        <label className = "label">Password</label>
+        <input type = "type" name= "password"className = "input"/>
+        <button className = "input">Login</button>
         </form>
         
     </div>
