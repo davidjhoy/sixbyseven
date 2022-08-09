@@ -1,10 +1,20 @@
+
+body{
+   background-color: black;
+
+}
+
 .Login-container{
-    display: flexbox,
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    
     
     
 }
 
-body{
-   background-color: black;
-   
+.form{
+    display: flex;
+    flex-direction: column;
 }
