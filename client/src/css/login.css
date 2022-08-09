@@ -30,15 +30,25 @@ body{
     align-self: center;
     background-color: white;
     border-radius: 50pt;
+    font-weight: 800;
+    font-size: 14pt;
+    caret-color: transparent;
 }
 
 .label{
     color: white;
-    font-size: 14pt;
+    font-size: 15pt;
+    font-weight: 600;
     width: 40% ;
     margin-bottom: 30px;
     align-self: center;
     align-content: center;
     border-color: white;
 
+}
+
+#Login-button{
+    min-height: 35px;
+    width: 20%;
+    margin-top: 5%;
 }
