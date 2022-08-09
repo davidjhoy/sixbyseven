@@ -7,9 +7,7 @@ import Login from './components/Login';
 function App() {
   return (
     <>
-      <Header>
-        
-      </Header>
+      <h1>Header</h1>
       <Switch>
           <Route exact path="/">
             <Login/> 
