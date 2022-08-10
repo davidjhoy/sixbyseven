@@ -1,6 +1,7 @@
 
 import React from 'react'
 import '../css/login.css';
+import '../assets/leaves.jpeg'
 
 
 const Login = () => {
