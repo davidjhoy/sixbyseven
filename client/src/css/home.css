@@ -1,0 +1,46 @@
+*{
+    color: white;
+}
+
+.Home-sidebar{
+    display: flex;
+    flex-direction: row;
+    grid-area: sidebar;
+    background-color: azure;
+    justify-self: center;
+    min-width: 200pt;
+    max-width: 300pt;
+}
+
+.Home-body{
+    grid-area: body;
+    height:100%;
+    background-color: aqua;
+}
+
+.Home-header{
+    grid-area: header;
+    height: 100%;
+    background-color: black;
+}
+
+.Home-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: footer;
+    height: 100%;
+    background-color: blueviolet;
+}
+
+.Home-container {
+    display: grid;
+    height: 100vh;
+  
+    grid-template-columns: 30% 25% 25% 20% ;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-areas:
+        "header header header header"
+        "body body body sidebar"
+        "footer footer footer footer"
+}
