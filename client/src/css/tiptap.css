@@ -73,6 +73,13 @@
   img {
     display: block;
     
-    width: 20%;
-    height: 30%;
+    width: 30vw;
+    height: 20vh;
+    max-width: 100%;
+
+  }
+
+
+  .React-icons{
+    font-size:1rem;  
   }

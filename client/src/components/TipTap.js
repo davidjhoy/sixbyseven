@@ -3,6 +3,8 @@ import Image from '@tiptap/extension-image'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import React, {useCallback} from 'react'
+import { FaBold, FaItalic, FaStrikethrough, FaCode, FaParagraph, FaArrowLeft, FaArrowRight, FaFileImage, FaQuoteLeft, FaCircle, FaSortNumericDown } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 const MenuBar = ({ editor }) => {
 
@@ -10,36 +12,38 @@ const MenuBar = ({ editor }) => {
 
   return (
     <>
+    <IconContext.Provider value={{ className: "React-icons" }}>
+
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'is-active' : ''}
       >
-        B
+       <FaBold />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? 'is-active' : ''}
       >
-        I
+        <FaItalic />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={editor.isActive('strike') ? 'is-active' : ''}
       >
-        strike
+        <FaStrikethrough />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         className={editor.isActive('code') ? 'is-active' : ''}
       >
-        code 
+        <FaCode />
       </button>
       
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={editor.isActive('paragraph') ? 'is-active' : ''}
       >
-        Par
+        <FaParagraph />
         
       </button>
       <button
@@ -65,35 +69,30 @@ const MenuBar = ({ editor }) => {
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? 'is-active' : ''}
       >
-        bullet list
+       <FaCircle/>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? 'is-active' : ''}
       >
-        ordered list
+       <FaSortNumericDown/>
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive('codeBlock') ? 'is-active' : ''}
-      >
-        code block
-      </button>
+     
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive('blockquote') ? 'is-active' : ''}
       >
-        blockquote
+        <FaQuoteLeft/>
       </button>
       
       
       <button onClick={() => editor.chain().focus().undo().run()}>
-        undo
+        <FaArrowLeft />
       </button>
       <button onClick={() => editor.chain().focus().redo().run()}>
-        redo
+      <FaArrowRight />
       </button>
-      
+      </IconContext.Provider>
 
     </>
   )
@@ -135,7 +134,7 @@ export default () => {
   return (
     <div>
       <MenuBar editor={editor} />
-      <button onClick={addImage}>setImage</button>
+      <button onClick={addImage}><FaFileImage/></button>
       <EditorContent editor={editor} />
     </div>
   )
