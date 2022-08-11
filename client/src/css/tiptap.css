@@ -49,11 +49,7 @@
       }
     }
   
-    img {
-      max-width: 80%;
-      height: auto;
-    }
-  
+    
     blockquote {
       padding-left: 1rem;
       border-left: 2px solid rgba(#0D0D0D, 0.1);
@@ -64,4 +60,19 @@
       border-top: 2px solid rgba(#0D0D0D, 0.1);
       margin: 2rem 0;
     }
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68cef8;
+    }
+  }
+
+  button{
+    height: 2rem;
+    width: 5rem;
+    align-self: centerß;
+  }
+  img {
+    display: block;
+    
+    width: 20%;
+    height: 30%;
   }

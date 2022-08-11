@@ -11,7 +11,7 @@ const Profile = () => {
       </div>
 
       <div className='Profile-body'>
-        <p>body</p>
+     
         <section className='Profile-body-section'>
           <Tiptap className="tiptap"/>
           
