@@ -11,7 +11,11 @@ function App() {
     <>
       
       <Router>
-      <h1>NavBar</h1>
+        <div className = "Navbar">
+          <NavLink to="/home"> Home </NavLink>
+          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/login">Login</NavLink>
+        </div>
         <Routes>
           <Route path="/login" element = {<Login />} />
           <Route path="/home" element = {<Home />}/>
