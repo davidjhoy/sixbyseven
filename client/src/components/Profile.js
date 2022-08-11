@@ -1,4 +1,5 @@
 import React from 'react';
+import Tiptap from './TipTap';
 import '../css/profile.css';
 
 
@@ -12,6 +13,7 @@ const Profile = () => {
       <div className='Profile-body'>
         <p>body</p>
         <section className='Profile-body-section'>
+          <Tiptap className="tiptap"/>
           
         </section>
       </div>
