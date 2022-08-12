@@ -6,6 +6,7 @@ import Logout from './components/Logout';
 import AuthBtn from './components/AuthBtn';
 import Home from './components/Home';
 import Profile from './components/Profile';
+import Staging from './components/Staging';
 
 
 
@@ -21,13 +22,15 @@ function App() {
         <div className = "Navbar">
           <NavLink to="/home"> Home </NavLink>
           <NavLink to="/profile">Profile</NavLink>
-          <AuthBtn />
+         
+          {/* <AuthBtn /> */}
         </div>
         <Routes>
-          <Route path = "/" element = {<Home />} /> 
-        
+          
+          <Route path="/" element = {<Staging/>}/>
           <Route path="/home" element = {<Home />}/>
           <Route path="/profile" element = {<Profile/>}/>
+        
         </Routes>
      
       <div className = "Home-footer"><p>Footer</p></div>
