@@ -20,11 +20,21 @@ function App() {
       
      
         <div className = "Navbar">
-          <NavLink to="/home"> Home </NavLink>
-          <NavLink to="/profile">Profile</NavLink>
+          <div className='Route-Links'>
+          <NavLink to="/home" className = "Links"> Home </NavLink>
+          <NavLink to="/profile" className = "Links">Profile</NavLink>
+          </div>
+          
+          <div className = "Hamburger">
+          
+            <Logout />
+            <Login />
+          </div>
+          
          
           {/* <AuthBtn /> */}
         </div>
+
         <Routes>
           
           <Route path="/" element = {<Staging/>}/>
@@ -33,7 +43,9 @@ function App() {
         
         </Routes>
      
-      <div className = "Home-footer"><p>Footer</p></div>
+        <div className='Profile-footer'>
+        <p className = "Footer-text">Copyright David Hoy 2022</p>
+      </div>
       
     </>
   );

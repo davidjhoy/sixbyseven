@@ -1,0 +1,58 @@
+
+.ArticleCard {
+    width: 85%;
+    height: auto;
+    /* border: 1pt solid black; */
+    
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all .3s ease-in-out; 
+    
+   
+}
+.ArticleCard:hover { 
+    transform: scale(1.02); 
+    }
+
+.Sample{
+
+    background-color: white;
+    justify-self: flex-start;
+    width: 75%;
+    margin-top: 1rem;
+    margin-left: 5%;
+    overflow: hidden;
+}
+
+.ProfileStuff {
+    display: flex;
+    background-color: white;
+    justify-self: flex-end;
+    width: 25%;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1pt transparent 50% grey;
+    
+}
+.ImageWrapper{
+    width: 6rem;
+    border: 1pt solid black;
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: 50%;
+    height: 6rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0px 5px 0 rgba(0, 0, 0, 0.19);
+    
+}
+
+h3, h2, p {
+    background-color: white;
+}
+
+.UserTitle{
+    margin-top: 3%;   
+    height: 5rem;
+}

@@ -10,8 +10,20 @@ const Home = () => {
     <div className='Home-container'>
 
       
-      <div className = "Home-sidebar"><p>SideBar</p></div>
-      <div className = "Home-body"><p>Body</p></div>
+      <div className = "Home-sidebar"></div>
+      <div className = "Home-body">
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+        <ArticleCard className = "Home-article-card" />
+      </div>
       
       
     </div>

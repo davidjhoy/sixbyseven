@@ -1,12 +1,33 @@
 body{
   color: black;
 }
-.Home-footer{
-  position: absolute;
-    bottom: 30px;
-    width: 100%;
+.Profile-footer{
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+  height: 50pt;
 }
 
 .Navbar{
-  height: 3vh;
+  height: 18vh;
+  
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+}
+.Links {
+  font: 400;
+  font-size: larger;
+}
+
+.Hamburger {
+  justify-self: flex;
+  
+}
+.Route-Links{
+  justify-self: start;
+ 
 }

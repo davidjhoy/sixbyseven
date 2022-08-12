@@ -2,34 +2,32 @@
 .Profile-container{
     display: flex;
     flex-direction: column;
+    background-color: whitesmoke;
     
 }
 
 .Profile-header{
     background-color: aqua;
     height: 10vh;
+    
 }
 
 
 .Profile-body{
-    background-color:white;
+
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    background-color: whitesmoke;
     height: 90vh;
 
 }
-
-.Profile-footer{
-    display: flex;
-    
-    align-items: center;
-    justify-content: center;
-    background-color: blanchedalmond;
-    height: 50pt;
+.ProseMirror {
+    background-color: white;
 }
+
+
 
 .Profile-body-section{
     display:grid;
@@ -39,13 +37,14 @@
     width: 60vw;
     min-width: 500pt;
     max-width: 2000px;
-    background-color: whitesmoke;
+    background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
 .tiptap{
     width: 100%;
     height: 100%;
+   
     
 }
 .Footer-text{
