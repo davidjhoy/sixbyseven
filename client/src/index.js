@@ -1,22 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router } from "react-router-dom";
 import './css/index.css';
 import App from './App';
-import { Auth0Provider } from "@auth0/auth0-react";
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
 root.render(
   <React.StrictMode>
-    <Auth0Provider
-    domain={domain}
-    clientId={clientId}
-    redirectUri="https://sixbyseven.herokuapp.com/home"
-  >
+     <Router>
+    <Auth0ProviderWithHistory>
     <App />
-    </Auth0Provider>
+    </Auth0ProviderWithHistory>
+    </Router>
   </React.StrictMode>
 );
 
