@@ -1,27 +1,16 @@
-
-import React from 'react'
-import '../css/login.css';
-import '../assets/leaves.jpeg'
-
-
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Login = () => {
-  
+  const { loginWithRedirect } = useAuth0();
   return (
-    <div className = "Login-container">
-        
-        <form className = "form">
-        <label className = "label">Username</label>
-        <input type = "text" name="username" className = "input"/>
-
-        <label className = "label">Password</label>
-        <input type = "type" name= "password"className = "input"/>
-
-        <button className = "input" id = "Login-button">Login</button>
-        </form>
-        
-    </div>
-  )
-}
+    <button
+      className="Login"
+      onClick={() => loginWithRedirect()}
+    >
+      Log In
+    </button>
+  );
+};
 
 export default Login;
