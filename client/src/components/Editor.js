@@ -2,10 +2,15 @@ import React from 'react';
 import Tiptap from './TipTap';
 import '../css/profile.css';
 import Logout from './Logout';
+import Navbar from './Navbar';
 
 
-const Profile = () => {
+
+const Editor = () => {
   return (
+    <>
+    <Navbar /> 
+    
     <div className='Profile-container'>
       
 
@@ -19,7 +24,8 @@ const Profile = () => {
 
       
     </div>
+    </>
   )
 }
 
-export default Profile;
+export default Editor;
