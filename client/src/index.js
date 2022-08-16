@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  
      <Router>
-    <Auth0ProviderWithHistory>
-    <App />
-    </Auth0ProviderWithHistory>
+        <Auth0ProviderWithHistory>
+            <App />
+        </Auth0ProviderWithHistory>
     </Router>
  
 );

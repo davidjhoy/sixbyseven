@@ -27,7 +27,7 @@ function App() {
           <Route path="/" element = {<Staging/>}/>
           <Route path="/home" element = {<Home />}/>
           <Route path="/editor" element = {<Editor/>}/>
-          <Route path="/articlepage" element = {<ArticlePage/>}/>
+          <Route path="/articlepage/:id" element = {<ArticlePage/>}/>
         </Routes>
      
         <div className='Profile-footer'>

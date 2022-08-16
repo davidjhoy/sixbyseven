@@ -1,6 +1,7 @@
 
 // import { generateHTML } from '@tiptap/html'
-import React, { useMemo } from 'react'
+import React, { useMemo, useNavigate, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
 import Bold from '@tiptap/extension-bold'
 import { generateHTML } from '@tiptap/core'
 import Document from '@tiptap/extension-document'
@@ -8,34 +9,63 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import Heading from '@tiptap/extension-heading'
 
-const ArticlePage = () => {
 
-  const json = {"type":"doc","content":[{"type":"heading","attrs":{"level":3},"content":[{"type":"text","text":"Your next great idea starts here ..."}]}]}
+const ArticlePage = ({id}) => {
+ 
+  const [output, setOutput] = useState("")
+  
+  //useEffect that will fetch a specific tiptap based on the id provided and save the data to "json"
 
-  const output = useMemo(() => {
-    return generateHTML(json, [
+  let params = useParams()
+  
+  const parseResult = (result) => {
+    
+    
+    setOutput(generateHTML(JSON.parse(result)["tiptap"], [
       Document,
       Paragraph,
       Text,
       Bold,
       Heading,
       // other extensions …
-    ])
-  }, [json])
-  
+    ]))
+  } 
 
+  useEffect(()=>{  
+    
+    
+    fetch(`http://localhost:3000/articles/${params.id}`)
+        
+       .then(response => response.text())
+       .then(result => parseResult(result))
+       .catch(error => console.log('error', error));
+ },[]
+ 
+  
+ )
+
+
+
+
+ 
+
+
+  
+  
+   
+  
+  
   const renderer = (input) => {
     return 
   }
 
-  console.log(output)
 
   return (
     <>
-      <div>ArticlePage</div>
-      
-      <div dangerouslySetInnerHTML={{ __html: output }}>
-         </div>
+      <div className = "Article-Page-Container">
+      {output ? <div dangerouslySetInnerHTML={{ __html: output }}>
+         </div> : <p>Loading...</p>}
+      </div>
       
     </>
   )
