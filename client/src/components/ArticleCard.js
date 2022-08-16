@@ -1,12 +1,12 @@
 import React from 'react';
 import '../css/articleCard.css';
 
-const ArticleCard = () => {
+const ArticleCard = ({sample, title}) => {
   return (
     <div className = "ArticleCard">
       <div className = "Sample">
-        <h2>Title</h2>
-        <div className= "SampleTextWrapper"><p>Sample Text</p></div>
+        <h2>{title}</h2>
+        <div className= "SampleTextWrapper"><p>{sample}</p></div>
         
       </div>
 

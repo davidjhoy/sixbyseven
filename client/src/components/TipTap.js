@@ -7,7 +7,9 @@ import { FaBold, FaItalic, FaStrikethrough, FaCode, FaParagraph, FaArrowLeft, Fa
 import { IconContext } from "react-icons";
 
 const MenuBar = ({ editor }) => {
-
+  
+  
+  
 
 
   return (
@@ -111,6 +113,9 @@ export default () => {
       
     `,
   })
+
+
+
   Image.configure({
     inline: true,
   })
@@ -129,13 +134,78 @@ export default () => {
   }
   
 
+ 
+  const PublishEvent = () => {
+    // fetch('http://localhost:3000/articles', {
+    //   method: 'POST',
+    //   mode: 'no-cors',
+    //   headers:{'Content-Type': 'application/json',
+    //   Accept: "application/json",
+    // },
+    //   body: JSON.stringify({
+    //     substance: "hello",
+    //     user_id: 1
+    //   })
+    // })
+    
+    //   .then(response => {
+    //     if(response.ok){
+         
+    //       response.json().then(() => {
+    //         console.log("hello")
+    //     }
+
+      // )}})
+      const json = editor.getJSON()
+      const stringJ = JSON.stringify(json)
+      console.log(stringJ)
+
+      const substance = editor.getText()
+      const sample_text = substance.split(".").slice(0,3).join(". ") + "..."
+
+      console.log(substance)
+   
+     fetch('http://localhost:3000/articles', {
+       method: "POST",
+       mode: 'cors',
+       headers: {
+           "Content-Type": "application/json",
+         
+          "Access-Control-Allow-Origin" : "*", 
+          "Access-Control-Allow-Credentials" : true 
+           },
+         body: JSON.stringify({
+          "substance": substance,
+          "sample_text": sample_text,
+          "likes": 10,
+          "tiptap": json,
+          "title": "Adventures at Hogwarts",
+          "user_id":1
+          
+      }),
+        redirect: "follow"
+         })
+         
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    // 
+          
+      }
+    
+
   
 
   return (
-    <div>
+    <div className = "TiptapWrap">
+
+      <div>
       <MenuBar editor={editor} />
       <button onClick={addImage}><FaFileImage/></button>
       <EditorContent editor={editor} />
+      </div>
+
+      <button className="TipTapPublish" onClick={PublishEvent}>Publish</button>
     </div>
   )
 }

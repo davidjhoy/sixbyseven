@@ -4,7 +4,7 @@
     align-content: center;
     padding-left: 5%;
     color: black;
-    border: 1pt solid black;
+    /* border: 1pt solid black; */
     width: 95%;
     justify-self: center;
     align-self: center;
@@ -73,7 +73,7 @@
   img {
     display: block;
     
-    width: 30vw;
+    width: auto;
     height: 20vh;
     max-width: 100%;
 

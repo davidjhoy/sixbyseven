@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_13_160940) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_202753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
-    t.string "text"
+    t.string "substance"
     t.datetime "date"
     t.string "sample_text"
     t.string "title"
@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_160940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes"
-    t.jsonb "rich_text"
+    t.jsonb "tiptap"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 

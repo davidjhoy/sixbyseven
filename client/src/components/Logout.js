@@ -9,7 +9,7 @@ function LogoutButton() {
 
   return  (
     <button onClick={() => {
-      logout({ returnTo: "http://localhost:3000/" });
+      logout({ returnTo: "http://localhost:4000/" });
     }}>Log out</button>
   );
 }
