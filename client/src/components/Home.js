@@ -14,13 +14,22 @@ const Home = () => {
     SetArticleList(JSON.parse(result))
     
   }
+  const CardClick = () => {
+    console.log("Hello")
+    //here I will need to use History to push to a articlepage but I will also need the full articlepage to receive the id in params to search for the specific article
+  }
 
   const makeCards = () => {
     
-    articleList.map((article)=>{
+   return articleList.map( article=>{
       // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
-    console.log(article)
-    })
+   
+    return <ArticleCard className = "Home-article-card" title = {article.title} key = {article.title} onClick = {CardClick}/>
+    }
+   )
+    
+ 
+    
     
    
   }
@@ -33,24 +42,20 @@ const Home = () => {
         .catch(error => console.log('error', error));
   },[])
 
-    makeCards()
+  
   
   return (
     <>
       <Navbar />
-
+      
       <div className='Home-container'>
 
         
         <div className = "Home-sidebar"></div>
         <div className = "Home-body">
           <ArticleCard className = "Home-article-card" />
-          <ArticleCard className = "Home-article-card" />
-          <ArticleCard className = "Home-article-card" />
-          <ArticleCard className = "Home-article-card" />
-          <ArticleCard className = "Home-article-card" />
-          <ArticleCard className = "Home-article-card" />
-          {articleList ? makeCards : <p>Loading ...</p>}
+          {articleList ? makeCards() : <p>"Loading ..."</p>}
+          
         </div>
         
         
