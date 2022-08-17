@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     end
 
     def create
+        
         user = User.create(user_params)
         if user.valid?
             # session[:realtor_id] = realtor.id
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
     private 
 
     def user_params
-    params.permit(:name, :location, :about, :photo)
+    params.permit(:name, :location, :about, :photo, :clientID, :user)
 
     end
 

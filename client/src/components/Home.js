@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 const Home = () => {
   const [articleList, SetArticleList] = useState("")
   const { isAuthenticated } = useAuth0();
-  
+  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 
   const parseArticles = (result) => {
@@ -40,7 +40,7 @@ const Home = () => {
   },[])
 
   
-  
+  console.log(clientId)
   return (
     <>
       <Navbar />
@@ -48,7 +48,12 @@ const Home = () => {
       <div className='Home-container'>
 
         
-        <div className = "Home-sidebar"></div>
+        <div className = "Home-sidebar">
+          <input id = "sideBarInput"></input>
+          <p>Highlight Cards</p>
+        </div>
+
+
         <div className = "Home-body">
           <ArticleCard className = "Home-article-card" />
           {articleList ? makeCards() : <p>"Loading ..."</p>}

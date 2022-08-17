@@ -4,11 +4,12 @@
 
 .Home-sidebar{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     /* border: 1pt solid black; */
     grid-area: sidebar;
-    background-color:white;
+    /* background-color:white; */
     justify-self: left;
+    overflow: hidden;
     
     height: 90vh;
     min-width: 200pt;
@@ -41,3 +42,10 @@
         "footer footer footer footer"
 }
 
+#sideBarInput{
+    border-radius: 25px;
+    font-size: 13pt;
+    padding-left: 5%;
+    background-color: white;
+    overflow: hidden;
+}
