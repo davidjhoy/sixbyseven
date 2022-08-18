@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Editor from './components/Editor';
 import ArticlePage from './components/ArticlePage';
 import Staging from './components/Staging';
+import Profile from './components/Profile';
 
 
 
@@ -28,11 +29,12 @@ function App() {
           <Route path="/home" element = {<Home />}/>
           <Route path="/editor" element = {<Editor/>}/>
           <Route path="/articlepage/:id" element = {<ArticlePage/>}/>
+          <Route path="/profile/" element = {<Profile />} />
         </Routes>
      
-        <div className='Profile-footer'>
+        {/* <div className="footer">
         <p className = "Footer-text">Copyright David Hoy 2022</p>
-      </div>
+        </div> */}
       
     </>
   );

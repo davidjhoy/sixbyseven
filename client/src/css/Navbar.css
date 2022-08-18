@@ -1,0 +1,28 @@
+.Navbar{
+    height: 18vh;
+    
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    
+    justify-content: space-between;
+    justify-content: flex-start;
+   
+  }
+  /* .Links {
+    font: 400;
+    font-size: larger;
+  } */
+  
+  .Hamburger {
+    justify-self: right;
+    align-self: right;
+
+    width: 20vw;
+    
+  }
+  /* .Route-Links{
+    justify-self: start;
+   
+  } */
+

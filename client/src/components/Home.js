@@ -50,7 +50,8 @@ const Home = () => {
         
         <div className = "Home-sidebar">
           <input id = "sideBarInput"></input>
-          <p>Highlight Cards</p>
+          <p id ="HighlightText">Highlight Cards</p>
+          {/* I will need a useEffect to grab the top ranking articles are create cards for them here */}
         </div>
 
 

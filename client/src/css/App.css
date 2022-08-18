@@ -1,33 +1,14 @@
 body{
   color: black;
 }
-.Profile-footer{
+.footer{
   display: flex;
-  
+  position:fixed; 
   align-items: center;
   justify-content: center;
   height: 50pt;
-}
-
-.Navbar{
-  height: 18vh;
-  
+  bottom: 0;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
- 
-}
-.Links {
-  font: 400;
-  font-size: larger;
-}
-
-.Hamburger {
-  justify-self: flex;
   
 }
-.Route-Links{
-  justify-self: start;
- 
-}
+

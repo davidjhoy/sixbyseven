@@ -1,0 +1,54 @@
+.ProfileBodyWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    
+}
+
+.LeftSideWrapper{
+    border: 1pt solid black;
+    width: 20vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.CenterWrapper{
+    display: flex;
+    flex-direction: column;
+    border: 1pt solid black;
+    width: 60vw;
+    height: 100vh;
+    gap: 4%;
+  
+    
+}
+
+.RightSideWrapper{
+    border: 1pt solid black;
+    width: 20vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+#LeftSideTitle{
+    background-color: transparent;
+    justify-self: center;
+   
+}
+
+#CenterWrapperTitle{
+    background-color: transparent;
+    justify-self: center;
+    align-self: center;
+}
+
+#RightWrapperTitle{
+    
+    background-color: transparent;
+    align-self: center;
+    justify-self: center;
+    
+}
