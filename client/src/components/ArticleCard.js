@@ -7,7 +7,7 @@ const ArticleCard = ({sample, title, id}) => {
 
 
   const CardClick = () => {
-    console.log("Hello")
+
     navigate(`/articlePage/${id}`)
   //   //here I will need to use History to push to a articlepage but I will also need the full articlepage to receive the id in params to search for the specific article
   }

@@ -6,4 +6,8 @@ Rails.application.routes.draw do
 
   resources :articles
   resources :users
+  resources :comments
+
+  get '/highlights', to: 'highlights#index'
+
 end

@@ -1,0 +1,30 @@
+.HighLightCardWrapper{
+    width: 100%;
+    background-color: white;
+    height: 13vh;
+    margin-top: 6%;
+    box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.HighLightCardTitle{
+    background-color: white;
+    font-size: 16pt;
+    font-weight: 700;
+    padding-left: 5%;
+    padding-top: 3%;
+}
+
+.HighLightCardSubtitle{
+    background-color: white;
+    color: grey;
+    font-size: 8pt;
+    font-weight: 500;
+    padding-left: 5%;
+}
+
+.HighLightCardText{
+    background-color: white;
+    font-size: 11pt;
+    padding-left: 5%;
+}
