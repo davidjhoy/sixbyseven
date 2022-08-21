@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
     private 
 
     def article_params
-    params.permit(:title, :date, :sample_text, :likes, {tiptap: {} }, :substance, :user_id, :article, :Rank, :id)
+    params.permit(:title, :date, :sample_text, :likes, {tiptap: {} }, :substance, :user_id, :article, :Rank, :id, :ClientID)
 
     end
 end

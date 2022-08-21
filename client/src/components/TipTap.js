@@ -136,29 +136,10 @@ export default () => {
 
  
   const PublishEvent = () => {
-    // fetch('http://localhost:3000/articles', {
-    //   method: 'POST',
-    //   mode: 'no-cors',
-    //   headers:{'Content-Type': 'application/json',
-    //   Accept: "application/json",
-    // },
-    //   body: JSON.stringify({
-    //     substance: "hello",
-    //     user_id: 1
-    //   })
-    // })
-    
-    //   .then(response => {
-    //     if(response.ok){
-         
-    //       response.json().then(() => {
-    //         console.log("hello")
-    //     }
-
-      // )}})
+   
       const json = editor.getJSON()
       const stringJ = JSON.stringify(json)
-      console.log(stringJ)
+      const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
       const substance = editor.getText()
       const sample_text = substance.split(".").slice(0,3).join(". ") + "..."
@@ -180,7 +161,8 @@ export default () => {
           "likes": 10,
           "tiptap": json,
           "title": "Adventures at Hogwarts",
-          "user_id":1
+          "user_id":1,
+          "ClientID": clientId
           
       }),
         redirect: "follow"

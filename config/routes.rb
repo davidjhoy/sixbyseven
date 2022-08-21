@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :comments
 
   get '/highlights', to: 'highlights#index'
+  get '/profiles/:id', to: 'profilecards#index'
 
 end
