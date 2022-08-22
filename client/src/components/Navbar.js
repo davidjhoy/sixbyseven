@@ -4,6 +4,7 @@ import Login from './Login';
 import Logout from './Logout';
 import Sidebar from './Sidebar';
 import '../css/Navbar.css';
+import Union from '../assets/Union.png';
 
 const Navbar = () => {
   return (
@@ -13,13 +14,13 @@ const Navbar = () => {
     <NavLink to="/editor" className = "Links">Editor</NavLink>
     </div> */}
     
-    
-    <div className = "Hamburger">
-    
-      {/* <Logout />
-      <Login /> */}
-      <Sidebar id = "Sidebar"/>
-    </div>
+      <img src = {Union} alt = { "siteLogo"} className="siteLogo"/>
+      <div className = "Hamburger">
+      
+        {/* <Logout />
+        <Login /> */}
+        <Sidebar id = "Sidebar"/>
+      </div>
     
    
     {/* <AuthBtn /> */}
