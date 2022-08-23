@@ -31,8 +31,10 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        comment = Comment.find(params[:id])
-        comment.destroy
+   
+        comments = Comment.where(article_id: params[:id])
+       
+        comments.destroy_all
         head :no_content    
 
     end

@@ -1,6 +1,7 @@
 
 // import { generateHTML } from '@tiptap/html'
-import React, { useMemo, useNavigate, useEffect, useState } from 'react';
+import React, { useMemo,  useEffect, useState } from 'react';
+
 import Navbar from "./Navbar";
 import CommentCard from './CommentCard';
 import { useParams } from 'react-router-dom'
@@ -16,21 +17,23 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
-
+import { useNavigate } from "react-router-dom";
 const ArticlePage = ({id}) => {
-  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
- 
+  const navigate = useNavigate()
+  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
   const [output, setOutput] = useState("")
   const [Rank, setRank] = useState("")
   const [likes, setLikes] = useState("")
   const [ArtComments, SetArtComments] = useState("")
+  const [ArtUserId, setArtUserId] = useState("")
+  const [CurrentUserId, setCurrentUserId] = useState("")
   
-
   let params = useParams()
+  
   
   const parseResult = (result) => {
     
-  
+    setArtUserId(JSON.parse(result)["user_id"])
     setLikes(JSON.parse(result)["likes"])
     setRank(JSON.parse(result)["Rank"])
     setOutput(generateHTML(JSON.parse(result)["tiptap"], [
@@ -44,6 +47,9 @@ const ArticlePage = ({id}) => {
     ]))
   } 
 
+  const logCurrentUserId = (res) =>{
+    setCurrentUserId(res[0]["id"])
+  }
   const parseComments = (result) => {
     // return result.map((comment)=>{
     //   return <CommentCard CommentText = {comment.text} UserID = {comment["user_id"]} />
@@ -51,9 +57,11 @@ const ArticlePage = ({id}) => {
     SetArtComments(result);
   }
 
-
   useEffect(()=>{  
-    
+    fetch(`http://localhost:3000/users/${clientId}`)
+    .then(response => response.json())
+    .then(res => logCurrentUserId(res))
+    .catch(error => console.log('error', error));
     
     fetch(`http://localhost:3000/articles/${params.id}`)
         
@@ -69,8 +77,7 @@ const ArticlePage = ({id}) => {
        
  },[]
   )
-   
- 
+
  const MakeComments = () =>{
   
   return ArtComments.map((comment)=> {
@@ -121,38 +128,53 @@ const ArticlePage = ({id}) => {
 })
   .then((response) => response.json())
   .then((json) => console.log(json));
+
+  SetArtComments([...ArtComments, {"user_id": 1, "text":e.target.CommentText.value}])
+  
+  }
+  
+  const handleDelete = () =>{
+    
+    fetch(`http://localhost:3000/articles/${params.id}`, {method: 'DELETE'})
+    .then(response => response.json())
+    .then(res => console.log(res))
+    .catch(error => console.log('error', error));
+    navigate('/home')
+
+    
+    
+    
+
+
   }
 
+ 
   return (
     <>
       <Navbar />
       <div className =  "PageWrapper">
         <div><h1>Title Goes Here</h1></div>
-        <div className = "Article-Page-Container">
-        {output ? <div dangerouslySetInnerHTML={{ __html: output }}>
-          </div> : <p>Loading...</p>}
-        </div>
-        <div className = "CheersContainer">
-          <p onClick={LadyBug}>🐞</p>
-          <p>{likes}</p>
-        </div>
 
+          <div className = "Article-Page-Container">
+            {output ? <div dangerouslySetInnerHTML={{ __html: output }}>
+            </div> : <p>Loading...</p>}
+            {ArtUserId === CurrentUserId ? <button onClick = {handleDelete}>Delete</button> : null}
+          </div>
 
+          <div className = "CheersContainer">
+            <p onClick={LadyBug}>🐞</p>
+            <p>{likes}</p>
+          </div>
 
-
-
-
-
-        <div className = "CommentSection" >
-        {ArtComments ? MakeComments() : <p>"Loading ..."</p>}
-       
-        <form onSubmit={(e) => {CommentSubmit(e)}}>
-        <input type = "text" name ="CommentText"></input>
+          <div className = "CommentSection" >
+            {ArtComments ? MakeComments() : <p>"Loading ..."</p>}
+          
+            <form onSubmit={(e) => {CommentSubmit(e)}}>
+            <input type = "text" name ="CommentText"></input>
+            <button type = "Submit" value = "Submit">Send</button>
+            </form>
       
-        <button type = "Submit" value = "Submit">Send</button>
-        </form>
-     
-        </div>
+          </div>
 
 
       </div>

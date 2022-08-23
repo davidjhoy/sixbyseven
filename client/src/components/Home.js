@@ -4,8 +4,10 @@ import ArticleCard from './ArticleCard';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './Navbar';
 import HighLightCard from './HighLightCard';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [articleList, SetArticleList] = useState("")
   const [highlights, SetHighlights] = useState("")
   const { isAuthenticated } = useAuth0();
@@ -16,6 +18,7 @@ const Home = () => {
     SetArticleList(JSON.parse(result))
     
   }
+  
   const parseHighlights = (result) => {
     SetHighlights(result)
   }
@@ -25,14 +28,9 @@ const Home = () => {
    return articleList.map( article=>{
       // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
    
-    return <ArticleCard className = "Home-article-card" title = {article.title} key = {article.title} id = {article.id}/>
+    return <ArticleCard className = "Home-article-card" title = {article.title} sample = {article["sample_text"]} key = {article["sample_text"]} id = {article.id} author = {article["author"]}/>
     }
    )
-    
- 
-    
-    
-   
   }
 
   useEffect(()=>{  
@@ -50,12 +48,11 @@ const Home = () => {
     
   },[])
 
-
   const makeHighLights = () => {
     return highlights.map((highlight)=>{
-      return <HighLightCard title = {highlight.title} sample_text = {highlight["sample_text"]} id = {highlight.id}/>
+      return <HighLightCard title = {highlight.title} sample_text = {highlight["sample_text"]} id = {highlight.id} key = {highlight["sample_text"]}/>
     })
-    console.log(highlights)
+   
   }
   
 
@@ -74,7 +71,7 @@ const Home = () => {
 
 
         <div className = "Home-body">
-          <ArticleCard className = "Home-article-card" />
+          
           {articleList ? makeCards() : <p>"Loading ..."</p>}
           
         </div>

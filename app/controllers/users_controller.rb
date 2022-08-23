@@ -4,8 +4,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find(params[:id])
-        render json: user, status: :ok
+        render json: User.where(clientID: params[:id]), status: :ok
+     
     end
 
     def create

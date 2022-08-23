@@ -5,13 +5,9 @@ import StarterKit from '@tiptap/starter-kit'
 import React, {useCallback} from 'react'
 import { FaBold, FaItalic, FaStrikethrough, FaCode, FaParagraph, FaArrowLeft, FaArrowRight, FaFileImage, FaQuoteLeft, FaCircle, FaSortNumericDown } from "react-icons/fa";
 import { IconContext } from "react-icons";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const MenuBar = ({ editor }) => {
-  
-  
-  
-
-
   return (
     <>
     <IconContext.Provider value={{ className: "React-icons" }}>
@@ -101,6 +97,8 @@ const MenuBar = ({ editor }) => {
 }
 
 export default () => {
+
+  const navigate = useNavigate();
   const editor = useEditor({
     extensions: [
       StarterKit, Image
@@ -114,12 +112,9 @@ export default () => {
     `,
   })
 
-
-
   Image.configure({
     inline: true,
   })
-
 
   const addImage = useCallback(() => {
     const url = window.prompt('URL')
@@ -132,51 +127,56 @@ export default () => {
   if (!editor) {
     return null
   }
-  
 
+  const CreateArticle = (user_id) =>{
+    
+    const json = editor.getJSON()
+    const stringJ = JSON.stringify(json)
+    const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
+    const substance = editor.getText()
+    const sample_text = substance.split(".").slice(0,3).join(". ") + "..."
+
+    
+ 
+   fetch('http://localhost:3000/articles', {
+     method: "POST",
+     mode: 'cors',
+     headers: {
+         "Content-Type": "application/json",
+       
+        "Access-Control-Allow-Origin" : "*", 
+        "Access-Control-Allow-Credentials" : true 
+         },
+       body: JSON.stringify({
+        "substance": substance,
+        "sample_text": sample_text,
+        "likes": 10,
+        "tiptap": json,
+        "title": "Adventures at Hogwarts",
+        "user_id":user_id[0]["id"],
+        "ClientID": clientId
+        
+    }),
+      redirect: "follow"
+       })
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+      navigate('/home')
+  }
  
   const PublishEvent = () => {
    
-      const json = editor.getJSON()
-      const stringJ = JSON.stringify(json)
-      const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-
-      const substance = editor.getText()
-      const sample_text = substance.split(".").slice(0,3).join(". ") + "..."
-
-      console.log(substance)
-   
-     fetch('http://localhost:3000/articles', {
-       method: "POST",
-       mode: 'cors',
-       headers: {
-           "Content-Type": "application/json",
-         
-          "Access-Control-Allow-Origin" : "*", 
-          "Access-Control-Allow-Credentials" : true 
-           },
-         body: JSON.stringify({
-          "substance": substance,
-          "sample_text": sample_text,
-          "likes": 10,
-          "tiptap": json,
-          "title": "Adventures at Hogwarts",
-          "user_id":1,
-          "ClientID": clientId
-          
-      }),
-        redirect: "follow"
-         })
-         
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-    // 
+    const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+    console.log(clientId)
+    fetch(`http://localhost:3000/users/${clientId}`)
+    .then(response => response.json())
+    .then(res => CreateArticle(res))
+    .catch(error => console.log('error', error));
           
       }
-    
-
-  
 
   return (
     <div className = "TiptapWrap">

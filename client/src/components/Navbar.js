@@ -5,8 +5,14 @@ import Logout from './Logout';
 import Sidebar from './Sidebar';
 import '../css/Navbar.css';
 import Union from '../assets/Union.png';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const imgClick = () =>{
+    navigate('/home')
+  }
   return (
     <div className = "Navbar">
     {/* <div className='Route-Links'>
@@ -14,7 +20,7 @@ const Navbar = () => {
     <NavLink to="/editor" className = "Links">Editor</NavLink>
     </div> */}
     
-      <img src = {Union} alt = { "siteLogo"} className="siteLogo"/>
+      <img src = {Union} alt = { "siteLogo"} className="siteLogo" onClick={imgClick}/>
       <div className = "Hamburger">
       
         {/* <Logout />
