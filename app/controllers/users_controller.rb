@@ -24,7 +24,8 @@ class UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         user.update(user_params)
-        render json: user, status: :accepted
+        image_url = rails_blob_path(user.image)
+        render json: {user: user, image_url: image_url}, status: :accepted
     end
 
     def destroy
