@@ -1,16 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Navbar   from './Navbar';
 import "../css/Profile.css";
 import ArticleCard from './ArticleCard';
 import { useAuth0 } from '@auth0/auth0-react';
 import {DirectUpload} from 'activestorage';
+import { UserContext } from '../contexts/UserContext';
 
 const Profile = () => {
     const [profiles, SetProfiles] = useState("")
     const [profileImage, SetProfileImage] = useState("")
     const [userId, SetUserId] = useState("")
     const [profilePhoto, SetProfilePhoto] = useState("")
-
+    const { USERID } = useContext(UserContext);
     const { user, isAuthenticated, isLoading } = useAuth0();
 
     const parseResult = (result) =>{
@@ -27,10 +28,10 @@ const Profile = () => {
     
         
     // }
-    
+    console.log(USERID)
 
     useEffect(()=>{
-        fetch(`http://localhost:3000/userc/6`)
+        fetch(`http://localhost:3000/userc/${USERID}`)
             
         .then(response => response.json())
         .then(result => setProfilePhoto(result))

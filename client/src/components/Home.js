@@ -5,6 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './Navbar';
 import HighLightCard from './HighLightCard';
 import { useNavigate } from "react-router-dom";
+import { UserContext } from '../contexts/UserContext';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Home = () => {
 
  
   const { user, isAuthenticated, isLoading } = useAuth0();
-  
+  const {USERID, SETUSERID} = useContext(UserContext);
   
 
   const parseArticles = (result) => {
@@ -50,7 +51,7 @@ const Home = () => {
         .then(result => parseHighlights(result))
         .catch(error => console.log('error', error));
 
-        
+      
           
       
       
@@ -64,8 +65,17 @@ const Home = () => {
    
   }
 
-  
-  if (user != undefined){
+  const setUSER = (response) =>{
+      console.log(response)
+        
+          SETUSERID(response.id) 
+        
+        
+    
+  }
+
+  const createUser = (user) => {
+    
     fetch(`http://localhost:3000/users`, {
     method: 'POST',
     body: JSON.stringify({
@@ -77,9 +87,20 @@ const Home = () => {
       },
     })
   .then((response) => response.json())
-  .then((json) => console.log(json));
+  .then((json) => setUSER(json))
+  .catch(error => console.log('error', error))
   }
 
+  useEffect(()=>{
+    if (user){
+      createUser(user)
+    }
+  },[user])
+ 
+  
+  
+
+  console.log(USERID)
   return (
     <>
       <Navbar />
