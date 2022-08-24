@@ -1,8 +1,9 @@
 class ArticlesController < ApplicationController
 
     def index
+       
         render json: Article.all
-        byebug
+       
     end
 
     def show

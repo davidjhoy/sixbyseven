@@ -1,5 +1,6 @@
 .ProseMirror {
     display: flex;
+    background-color: whtie;
     flex-direction: column;
     align-content: center;
     padding-left: 5%;
@@ -7,52 +8,19 @@
     /* border: 1pt solid black; */
     width: 95%;
     justify-self: center;
+    overflow: hidden;
     align-self: center;
     height: 80vh;
-    > * + * {
-      margin-top: 0.75em;
-      
-    }
+   
   
     ul,
     ol {
       padding: 0 1rem;
     }
   
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      line-height: 1.1;
-      
-    }
-  
-    code {
-      background-color: rgba(#616161, 0.1);
-      color: #616161;
-    }
-  
-    pre {
-      background: #0D0D0D;
-      color: black;
-      font-family: 'JetBrainsMono', monospace;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-  
-      code {
-        color: inherit;
-        padding: 0;
-        background: none;
-        font-size: 0.8rem;
-      }
-    }
-  
-    
     blockquote {
       padding-left: 1rem;
-      border-left: 2px solid rgba(#0D0D0D, 0.1);
+   
     }
   
     hr {
@@ -60,15 +28,19 @@
       border-top: 2px solid rgba(#0D0D0D, 0.1);
       margin: 2rem 0;
     }
-    &.ProseMirror-selectednode {
-      outline: 3px solid #68cef8;
-    }
+
   }
 
   button{
     height: 2rem;
     width: 5rem;
-    align-self: centerß;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    background-color: white;
+    margin-right: 2%;
+    border-radius: 30%;
   }
   img {
     display: block;
@@ -83,3 +55,37 @@
   .React-icons{
     font-size:1rem;  
   }
+
+  .TipTapMenuWrap{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+  
+  }
+
+  #TitleWrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3%;
+    margin-left: 5%;
+    gap: 3%;
+    align-items: center;
+  }
+  #TitleInput{
+    border: 0.5pt solid grey;
+    
+    width: 60%;
+    height: 2rem;
+    
+    
+  }
+  #h3Title{
+    margin-left: 3rem;
+  }
+
+  #TipTapPublish{
+    border-radius: 0%;
+    
+  }
+

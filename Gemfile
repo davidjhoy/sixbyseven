@@ -14,6 +14,9 @@ gem "puma", "~> 5.0"
 
 
 gem 'byebug'
+
+gem "image_processing", ">= 1.2"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 

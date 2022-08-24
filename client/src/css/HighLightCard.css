@@ -4,12 +4,13 @@
     height: 13vh;
     margin-top: 6%;
     box-shadow: 0 4px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 2px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem, 1rem, 1rem, 2rem;
 }
 
 
 .HighLightCardTitle{
     background-color: white;
-    font-size: 16pt;
+    font-size: 12pt;
     font-weight: 700;
     padding-left: 5%;
     padding-top: 3%;
@@ -25,6 +26,9 @@
 
 .HighLightCardText{
     background-color: white;
-    font-size: 11pt;
-    padding-left: 5%;
+    font-size: 10pt;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 }

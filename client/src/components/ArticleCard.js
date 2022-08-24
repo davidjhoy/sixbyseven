@@ -13,16 +13,17 @@ const ArticleCard = ({sample, title, id, author}) => {
   }
   return (
     <div className = "ArticleCard" onClick = {CardClick} >
+      <div className = "ProfileStuff">
+        <div className = "ImageWrapper"></div>
+        <div className = "UserTitle"><h3>{author}</h3></div>
+      </div>
       <div className = "Sample">
         <h2>{title}</h2>
         <div className= "SampleTextWrapper"><p>{sample}</p></div>
         
       </div>
 
-      <div className = "ProfileStuff">
-        <div className = "ImageWrapper"></div>
-        <h3 className = "UserTitle">{author}</h3>
-      </div>
+      
     </div>
   )
 }

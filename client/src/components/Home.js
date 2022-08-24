@@ -10,18 +10,21 @@ const Home = () => {
   const navigate = useNavigate();
   const [articleList, SetArticleList] = useState("")
   const [highlights, SetHighlights] = useState("")
-  const { isAuthenticated } = useAuth0();
-  const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
+ 
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  
+  
 
   const parseArticles = (result) => {
-    SetArticleList(JSON.parse(result))
+    SetArticleList(result)
     
   }
   
   const parseHighlights = (result) => {
     SetHighlights(result)
   }
+ 
 
   const makeCards = () => {
     
@@ -34,9 +37,10 @@ const Home = () => {
   }
 
   useEffect(()=>{  
+    
      fetch('http://localhost:3000/articles')
          
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => parseArticles(result))
         .catch(error => console.log('error', error));
 
@@ -45,16 +49,36 @@ const Home = () => {
         .then(response => response.json())
         .then(result => parseHighlights(result))
         .catch(error => console.log('error', error));
+
+        
+          
+      
+      
     
   },[])
 
   const makeHighLights = () => {
     return highlights.map((highlight)=>{
-      return <HighLightCard title = {highlight.title} sample_text = {highlight["sample_text"]} id = {highlight.id} key = {highlight["sample_text"]}/>
+      return <HighLightCard title = {highlight.title} sample_text = {highlight["sample_text"].split('').slice(0,100)} id = {highlight.id} key = {highlight["sample_text"]}/>
     })
    
   }
+
   
+  if (user != undefined){
+    fetch(`http://localhost:3000/users`, {
+    method: 'POST',
+    body: JSON.stringify({
+      "clientID": user["sub"],
+      
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+  }
 
   return (
     <>

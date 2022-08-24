@@ -2,17 +2,19 @@ import "../css/tiptap.css";
 import Image from '@tiptap/extension-image'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import { FaBold, FaItalic, FaStrikethrough, FaCode, FaParagraph, FaArrowLeft, FaArrowRight, FaFileImage, FaQuoteLeft, FaCircle, FaSortNumericDown } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const MenuBar = ({ editor }) => {
   return (
     <>
-    <IconContext.Provider value={{ className: "React-icons" }}>
+    <IconContext.Provider value={{ className: "React-icons" }} >
 
       <button
+      
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'is-active' : ''}
       >
@@ -30,38 +32,7 @@ const MenuBar = ({ editor }) => {
       >
         <FaStrikethrough />
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        className={editor.isActive('code') ? 'is-active' : ''}
-      >
-        <FaCode />
-      </button>
       
-      <button
-        onClick={() => editor.chain().focus().setParagraph().run()}
-        className={editor.isActive('paragraph') ? 'is-active' : ''}
-      >
-        <FaParagraph />
-        
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
-      >
-        h1
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
-      >
-        h2
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
-      >
-        h3
-      </button>
      
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -90,6 +61,19 @@ const MenuBar = ({ editor }) => {
       <button onClick={() => editor.chain().focus().redo().run()}>
       <FaArrowRight />
       </button>
+      <button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
+      >
+        h1
+      </button>
+      <button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+      >
+        h2
+      </button>
+     
       </IconContext.Provider>
 
     </>
@@ -97,13 +81,20 @@ const MenuBar = ({ editor }) => {
 }
 
 export default () => {
-
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate();
+  const [ArticleTitle, setArticleTitle] = useState("")
+
+  const handletitle = (e) =>{
+    setArticleTitle(e.target.value)
+  }
   const editor = useEditor({
     extensions: [
       StarterKit, Image
     ],
     content: `
+   
+   
       <h3>
         Your next great idea starts here ...
       </h3>
@@ -111,6 +102,7 @@ export default () => {
       
     `,
   })
+  
 
   Image.configure({
     inline: true,
@@ -132,10 +124,10 @@ export default () => {
     
     const json = editor.getJSON()
     const stringJ = JSON.stringify(json)
-    const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+    
 
     const substance = editor.getText()
-    const sample_text = substance.split(".").slice(0,3).join(". ") + "..."
+    const sample_text = substance.split(" ").slice(0,80).join(" ") + "..."
 
     
  
@@ -153,9 +145,9 @@ export default () => {
         "sample_text": sample_text,
         "likes": 10,
         "tiptap": json,
-        "title": "Adventures at Hogwarts",
+        "title": ArticleTitle,
         "user_id":user_id[0]["id"],
-        "ClientID": clientId
+        "ClientID": user.sub
         
     }),
       redirect: "follow"
@@ -169,25 +161,34 @@ export default () => {
  
   const PublishEvent = () => {
    
-    const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-    console.log(clientId)
-    fetch(`http://localhost:3000/users/${clientId}`)
+    
+    
+    fetch(`http://localhost:3000/users/${user.sub}`)
     .then(response => response.json())
     .then(res => CreateArticle(res))
     .catch(error => console.log('error', error));
           
       }
 
+     
+
   return (
     <div className = "TiptapWrap">
 
-      <div>
-      <MenuBar editor={editor} />
-      <button onClick={addImage}><FaFileImage/></button>
-      <EditorContent editor={editor} />
-      </div>
+        <div className = "TipTapMenuWrap">
+          <MenuBar editor={editor} className = "MenuItems" />
+          <button onClick={addImage} className = "MenuItems"><FaFileImage/></button>
+        
+        </div>
 
-      <button className="TipTapPublish" onClick={PublishEvent}>Publish</button>
+        <div id = "TitleWrapper">
+          <h3 >Title:</h3>
+          <input type = "text" onChange = {handletitle} id = "TitleInput"/>
+        </div>
+        <EditorContent editor={editor} />
+     
+
+      <button id="TipTapPublish" onClick={PublishEvent}>Publish</button>
     </div>
   )
 }

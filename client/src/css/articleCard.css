@@ -11,6 +11,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
     transition: all .3s ease-in-out; 
     
+    
    
 }
 .ArticleCard:hover { 
@@ -23,24 +24,27 @@
     justify-self: flex-start;
     width: 75%;
     margin-top: 1rem;
-    margin-left: 5%;
+    /* margin-left: 5%; */
     overflow: hidden;
+    margin-right: 5%;
+    
 }
 
 .ProfileStuff {
     display: flex;
     background-color: white;
-    justify-self: flex-end;
+    /* justify-self: flex-end; */
     width: 25%;
     flex-direction: column;
     align-items: center;
-    border-left: 1pt transparent 50% grey;
+    justify-content: center;
+    /* border-left: 1pt transparent 50% grey; */
     
 }
 .ImageWrapper{
     width: 6rem;
     /* border: 1pt solid black; */
-    margin-top: 1rem;
+    margin-top: 2rem;
     overflow: hidden;
     border-radius: 50%;
     height: 6rem;
@@ -53,6 +57,12 @@ h3, h2, p {
 }
 
 .UserTitle{
-    margin-top: 3%;   
-    height: 5rem;
+    margin-top: 5%;   
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+   
+
 }

@@ -6,16 +6,13 @@ import '../css/staging.css'
 
 
 const Staging = () => {
-    const { isAuthenticated } = useAuth0();
-    const {
-   
-      loginWithRedirect
-    } = useAuth0();
+
+    const {loginWithRedirect} = useAuth0();
   return (
     
     <div className='Staging-container'>
       <div id = "Welcome">Welcome</div>
-      <h3 id = "WelcomeClick" onClick = {loginWithRedirect}>Click here to get started</h3>
+      <h3 id = "WelcomeClick" onClick = {() => loginWithRedirect()}>Click here to get started</h3>
 
       
     </div>

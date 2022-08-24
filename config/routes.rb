@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   get '/highlights', to: 'highlights#index'
   get '/profiles/:id', to: 'profilecards#index'
+  get '/userc/:id', to: 'useradditional#index' 
 
 end

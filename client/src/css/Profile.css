@@ -12,6 +12,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    border-right: 0.5pt solid rgba(128, 128, 128, 0.157);
     
 }
 
@@ -33,6 +34,8 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
+    border-left: 0.5pt solid rgba(128, 128, 128, 0.157);
 }
 #LeftSideTitle{
     background-color: transparent;
@@ -52,4 +55,24 @@
     align-self: center;
     justify-self: center;
     
+}
+
+/* #RightWrapperTitle:hover {
+    color: rgb(144, 36, 15);
+} */
+
+#AvatarUpload{
+    align-self: center;
+    margin-left: 20%;
+}
+
+#PhotoSubmit{
+    border-radius: 0%;
+    height: 50% ;
+    align-self: center;
+    margin-left: 20%;
+    font-size: xx-small;
+    font-weight: 600;
+    background-color: rgba(157, 154, 154, 0.309);
+    margin-top: 5%;
 }

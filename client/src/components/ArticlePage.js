@@ -12,12 +12,16 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
+import Italic from '@tiptap/extension-italic'
 import '../css/ArticlePage.css'
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
+
+
 const ArticlePage = ({id}) => {
   const navigate = useNavigate()
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
@@ -27,6 +31,9 @@ const ArticlePage = ({id}) => {
   const [ArtComments, SetArtComments] = useState("")
   const [ArtUserId, setArtUserId] = useState("")
   const [CurrentUserId, setCurrentUserId] = useState("")
+  const [ArticleTitle, SetArticleTitle] = useState("")
+  const [Author, SetAuthor] = useState("")
+  const { user, isAuthenticated, isLoading } = useAuth0();
   
   let params = useParams()
   
@@ -34,6 +41,8 @@ const ArticlePage = ({id}) => {
   const parseResult = (result) => {
     
     setArtUserId(JSON.parse(result)["user_id"])
+    SetAuthor(JSON.parse(result)["author"])
+    SetArticleTitle(JSON.parse(result)["title"])
     setLikes(JSON.parse(result)["likes"])
     setRank(JSON.parse(result)["Rank"])
     setOutput(generateHTML(JSON.parse(result)["tiptap"], [
@@ -42,7 +51,8 @@ const ArticlePage = ({id}) => {
       Text,
       Bold,
       Heading,
-      Image
+      Image,
+      Italic
       // other extensions …
     ]))
   } 
@@ -58,10 +68,10 @@ const ArticlePage = ({id}) => {
   }
 
   useEffect(()=>{  
-    fetch(`http://localhost:3000/users/${clientId}`)
-    .then(response => response.json())
-    .then(res => logCurrentUserId(res))
-    .catch(error => console.log('error', error));
+    // fetch(`http://localhost:3000/users/${clientId}`)
+    // .then(response => response.json())
+    // .then(res => logCurrentUserId(res))
+    // .catch(error => console.log('error', error));
     
     fetch(`http://localhost:3000/articles/${params.id}`)
         
@@ -81,7 +91,7 @@ const ArticlePage = ({id}) => {
  const MakeComments = () =>{
   
   return ArtComments.map((comment)=> {
-    return <CommentCard CommentText={comment.text} UserID = {comment["user_id"]} key = {comment.text}/>
+    return <CommentCard CommentText={comment.text} UserID = {comment["user_id"]} key = {comment.text} />
   })
  }
 
@@ -118,7 +128,7 @@ const ArticlePage = ({id}) => {
   method: 'POST',
   body: JSON.stringify({
     "article_id": ArticleId,
-    "user_id": 1,
+    "user_id": CurrentUserId,
     "text": e.target.CommentText.value
 
   }),
@@ -148,12 +158,21 @@ const ArticlePage = ({id}) => {
 
   }
 
+  if (user != undefined){
+    fetch(`http://localhost:3000/users/${user.sub}`)
+    .then(response => response.json())
+    .then(res => logCurrentUserId(res))
+    .catch(error => console.log('error', error));
+  }
+
+ 
  
   return (
     <>
       <Navbar />
       <div className =  "PageWrapper">
-        <div><h1>Title Goes Here</h1></div>
+        <div><h1>{ArticleTitle}</h1></div>
+        <h3 id = "author" > {Author}</h3>
 
           <div className = "Article-Page-Container">
             {output ? <div dangerouslySetInnerHTML={{ __html: output }}>
@@ -167,11 +186,12 @@ const ArticlePage = ({id}) => {
           </div>
 
           <div className = "CommentSection" >
+            <h2>Comments:</h2>
             {ArtComments ? MakeComments() : <p>"Loading ..."</p>}
-          
-            <form onSubmit={(e) => {CommentSubmit(e)}}>
-            <input type = "text" name ="CommentText"></input>
-            <button type = "Submit" value = "Submit">Send</button>
+            
+            <form onSubmit={(e) => {CommentSubmit(e)}} id = "CommentForm">
+            <textarea type = "text" name ="CommentText" id = "CommentInput"></textarea>
+            <button type = "Submit" value = "Submit" id = "CommentSubmit">Send</button>
             </form>
       
           </div>
