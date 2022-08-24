@@ -1,7 +1,9 @@
 class UseradditionalController < ApplicationController
 
     def index
-        render json: User.find(params[:id]), status: :ok
+        @user = User.find(params[:id])
+        render json: UserSerializer.new(@user).serializable_hash[:data][:attributes]
+     
      
     end
 
