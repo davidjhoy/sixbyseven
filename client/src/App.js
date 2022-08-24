@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './css/App.css';
+import React, { useMemo,  useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -9,11 +10,12 @@ import Editor from './components/Editor';
 import ArticlePage from './components/ArticlePage';
 import Staging from './components/Staging';
 import Profile from './components/Profile';
-
+import {UserContext} from './Contexts/UserContext';
 
 
 
 function App() {
+  const [UserID, SetUserID] = useState("")
 
 
   
@@ -21,7 +23,7 @@ function App() {
   return (
     <>
       
-     
+      <UserContext.Provider value ={{UserID, SetUserID}}>
        
         <Routes>
           
@@ -35,6 +37,8 @@ function App() {
         {/* <div className="footer">
         <p className = "Footer-text">Copyright David Hoy 2022</p>
         </div> */}
+
+      </UserContext.Provider>
       
     </>
   );

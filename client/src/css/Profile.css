@@ -76,3 +76,8 @@
     background-color: rgba(157, 154, 154, 0.309);
     margin-top: 5%;
 }
+
+#ProfilePhoto{
+    height: 100px;
+    width: 100px;
+}

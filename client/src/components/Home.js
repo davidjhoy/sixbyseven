@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "../css/home.css";
 import ArticleCard from './ArticleCard';
 import { useAuth0 } from '@auth0/auth0-react';
 import Navbar from './Navbar';
 import HighLightCard from './HighLightCard';
 import { useNavigate } from "react-router-dom";
+import {UserContext} from '../Contexts/UserContext';
+import { renderToStream } from '@react-pdf/renderer';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const Home = () => {
 
  
   const { user, isAuthenticated, isLoading } = useAuth0();
-  
+  const {UserID, SetUserID} = useContext(UserContext);
   
 
   const parseArticles = (result) => {
@@ -77,7 +79,10 @@ const Home = () => {
       },
     })
   .then((response) => response.json())
-  .then((json) => console.log(json));
+  .then((json) => console.log(json))
+  // .catch(error => console.error(error))
+
+  // This is where I will set the UserID the first time this thing renders
   }
 
   return (
