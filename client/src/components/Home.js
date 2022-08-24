@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "../css/home.css";
 import ArticleCard from './ArticleCard';
 import { useAuth0 } from '@auth0/auth0-react';
