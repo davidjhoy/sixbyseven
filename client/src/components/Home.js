@@ -22,7 +22,7 @@ const Home = () => {
 
   const parseArticles = (result) => {
     SetArticleList(result)
-    
+    SetDisplayList(result)
   }
   
   const parseHighlights = (result) => {
@@ -32,7 +32,7 @@ const Home = () => {
 
   const makeCards = () => {
     
-   return articleList.map( article=>{
+   return displayList.map( article=>{
       // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
    
     return <ArticleCard className = "Home-article-card" title = {article.title} sample = {article["sample_text"]} key = {article["sample_text"]} id = {article.id} author = {article["author"]} imageUrl = {article["ImageUrl"]}/>
@@ -101,11 +101,10 @@ const Home = () => {
   },[user])
  
   const setSideBarInput = (e) => {
-    
     SetSideBarInput(e.target.value);
     const interArticle = articleList
     const result = interArticle.filter(article => article.title.toLowerCase().includes(e.target.value))
-    SetArticleList(result)
+    SetDisplayList(result)
   }
   
   console.log(sideBarInput)
@@ -126,7 +125,7 @@ const Home = () => {
 
         <div className = "Home-body">
           
-          {articleList ? makeCards() : <p>"Loading ..."</p>}
+          {displayList ? makeCards() : <p>"Loading ..."</p>}
           
         </div>
         
