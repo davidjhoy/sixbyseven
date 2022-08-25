@@ -6,11 +6,14 @@ import Navbar from './Navbar';
 import HighLightCard from './HighLightCard';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../contexts/UserContext';
+import { GiConsoleController } from 'react-icons/gi';
 
 const Home = () => {
   const navigate = useNavigate();
   const [articleList, SetArticleList] = useState("")
+  const [displayList, SetDisplayList] = useState("")
   const [highlights, SetHighlights] = useState("")
+  const [sideBarInput, SetSideBarInput] = useState("")
 
  
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -97,10 +100,16 @@ const Home = () => {
     }
   },[user])
  
+  const setSideBarInput = (e) => {
+    
+    SetSideBarInput(e.target.value);
+    const interArticle = articleList
+    const result = interArticle.filter(article => article.title.toLowerCase().includes(e.target.value))
+    SetArticleList(result)
+  }
   
-  
+  console.log(sideBarInput)
 
-  console.log(USERID)
   return (
     <>
       <Navbar />
@@ -109,7 +118,7 @@ const Home = () => {
 
         
         <div className = "Home-sidebar">
-          <input id = "sideBarInput"></input>
+          <input id = "sideBarInput" type = "text" onChange = {setSideBarInput}></input>
           
           {highlights ? makeHighLights() : <p>Loading...</p>}
         </div>

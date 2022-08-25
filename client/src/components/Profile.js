@@ -147,7 +147,7 @@ const Profile = () => {
         <Navbar/>
         <div className = "ProfileBodyWrapper">
             <div className = "LeftSideWrapper">
-                <h2 id = "LeftSideTitle">Favorited Articles</h2>
+                <h2 id = "LeftSideTitle"></h2>
             </div>
             <div className = "CenterWrapper">
                 <h2 id = "CenterWrapperTitle">Your Articles</h2>
