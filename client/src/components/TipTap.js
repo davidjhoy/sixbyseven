@@ -120,12 +120,10 @@ export default () => {
     return null
   }
 
-  const CreateArticle = (user_id) =>{
+  const CreateArticle = (response) =>{
     
     const json = editor.getJSON()
     const stringJ = JSON.stringify(json)
-    
-
     const substance = editor.getText()
     const sample_text = substance.split(" ").slice(0,80).join(" ") + "..."
 
@@ -146,7 +144,7 @@ export default () => {
         "likes": 10,
         "tiptap": json,
         "title": ArticleTitle,
-        "user_id":user_id[0]["id"],
+        "user_id":response[0]["id"],
         "ClientID": user.sub
         
     }),

@@ -4,43 +4,49 @@ import "../css/Profile.css";
 import ArticleCard from './ArticleCard';
 import { useAuth0 } from '@auth0/auth0-react';
 import {DirectUpload} from 'activestorage';
-import { UserContext } from '../contexts/UserContext';
+import { GiBlackHandShield } from 'react-icons/gi';
+
 
 const Profile = () => {
     const [profiles, SetProfiles] = useState("")
     const [profileImage, SetProfileImage] = useState("")
     const [userId, SetUserId] = useState("")
     const [profilePhoto, SetProfilePhoto] = useState("")
-    const { USERID } = useContext(UserContext);
+    
     const { user, isAuthenticated, isLoading } = useAuth0();
 
-    const parseResult = (result) =>{
-        SetProfiles(result)
-    }
-    // if (user != undefined){ 
-       
-    //     fetch(`http://localhost:3000/profiles/${user["sub"]}`)
-            
-    //     .then(response => response.json())
-    //     .then(result => parseResult(result))
-    //     .catch(error => console.log('error', error));
+    // This is the initial call to find the user id
 
-    
-        
-    // }
-    console.log(USERID)
+    if(user){
 
-    useEffect(()=>{
-        fetch(`http://localhost:3000/userc/${USERID}`)
-            
+        fetch(`http://localhost:3000/users/${user["sub"]}`)
         .then(response => response.json())
-        .then(result => setProfilePhoto(result))
-        .catch(error => console.log('error', error));
+        .then(result => HandleInitialFetch(result))
+        .catch(error => console.log(error))
 
-    },[])
-    
-   
+        
 
+    }
+
+
+    //Storing the userId in state and fetching the appropriate articles for the user
+   const HandleInitialFetch = (result) => {
+        SetUserId(result[0].id)
+        
+        fetch(`http://localhost:3000/userc/${result[0].id}`)
+        .then(response => response.json())
+        .then(result => SetProfilePhoto(result.image_url))
+        .catch(error => console.log(error))
+        
+        if(profiles){
+            return null;
+        }else{ 
+        fetch(`http://localhost:3000/profiles/${user["sub"]}`)
+        .then(response => response.json())
+        .then(result => SetProfiles(result))
+        .catch(error => console.log(error))}
+       
+    }
 
 
     const upLoadFile = (e) =>{
@@ -53,7 +59,7 @@ const Profile = () => {
                 console.log(error)
             } else {
                
-                fetch(`http://localhost:3000/users/6`, {
+                fetch(`http://localhost:3000/users/${userId}`, {
                      method: "PATCH",
                      mode: 'cors',
                      headers: {
@@ -71,9 +77,16 @@ const Profile = () => {
         }
         )
     }
-    
+    const setProfilePhoto = (data)=>{
+        SetProfilePhoto(data.image_url)
+    }
    
+    const handleImageChange = (e) => {
+        SetProfileImage(e.target.files[0])
+    }
 
+
+    //render the profile cards
     const makeProfiles = () =>{
         return profiles.map( article=>{
             // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
@@ -81,16 +94,7 @@ const Profile = () => {
           return <ArticleCard className = "Profile-article-card" title = {article.title} key = {article.title} id = {article.id} sample = {article["sample_text"]} author = {article["author"]}/>
         })
     }
-
-    const handleImageChange = (e) => {
-        SetProfileImage(e.target.files[0])
-    }
-
-    const setProfilePhoto = (data)=>{
-        SetProfilePhoto(data.image_url)
-    }
-
-  
+    
     return (
 
     <div>
@@ -104,7 +108,7 @@ const Profile = () => {
                 {profiles ? makeProfiles() : <p>Loading...</p>}
             </div>
             <div className = "RightSideWrapper">
-                <div className = "ImageWrapper"><img src ={profilePhoto} id="ProfilePhoto"/></div>
+                <div className = "ImageWrapper">{profilePhoto ? <img src ={profilePhoto} id="ProfilePhoto"/> : <p>...</p>}</div>
                 <h2 id = "RightWrapperTitle">Upload Photo</h2>
                 <form onSubmit = {(e)=> upLoadFile(e)} >
                 <input type = "file" name = "image" id = "image"  onChange = {handleImageChange}/>

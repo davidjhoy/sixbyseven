@@ -1,19 +1,41 @@
-import { createContext, useState, useMemo } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { useAuth0 } from '@auth0/auth0-react';
 
-const UserContext = createContext();
+const UserContext = React.createContext();
 
-const UserProvider = (props) => {
-    const [USERID, SETUSERID] = useState("");
+const UserProvider = ({children}) => {
+    const [USERID, SETUSERID] = useState(null);
+    const { user, isAuthenticated, isLoading } = useAuth0();
+
+    
+      useEffect(()=>{
+        if(user){
+        fetch(`http://localhost:3000/users`, {
+        method: 'POST',
+        body: JSON.stringify({
+          "clientID": user["sub"],
+          
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+      .then((response) => response.json())
+      .then((json) => SETUSERID(json.id))
+      .catch(error => console.log('error', error))
+      }
+    },[user]
+        
+      )
 
 
-const value = useMemo( 
-    () => ({USERID, SETUSERID}), [USERID])
+
 
     return (
         <UserContext.Provider
-        value = {value}
+        value = {{USERID, SETUSERID}}
         >
-            {props.children}
+            {children}
         </UserContext.Provider>
     );
 }

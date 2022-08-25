@@ -10,7 +10,7 @@ import Editor from './components/Editor';
 import ArticlePage from './components/ArticlePage';
 import Staging from './components/Staging';
 import Profile from './components/Profile';
-import {UserProvider} from './contexts/UserContext';
+
 
 
 
@@ -24,7 +24,7 @@ function App() {
     
       
      
-       <UserProvider>
+    
         <Routes>
           
           <Route path="/" element = {<Staging/>}/>
@@ -33,7 +33,7 @@ function App() {
           <Route path="/articlepage/:id" element = {<ArticlePage/>}/>
           <Route path="/profile/" element = {<Profile />} />
         </Routes>
-        </UserProvider>
+        
      
        
       
