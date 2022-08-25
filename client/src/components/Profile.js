@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import Navbar   from './Navbar';
 import "../css/Profile.css";
 import ArticleCard from './ArticleCard';
@@ -12,11 +12,11 @@ const Profile = () => {
     const [profileImage, SetProfileImage] = useState("")
     const [userId, SetUserId] = useState("")
     const [profilePhoto, SetProfilePhoto] = useState("")
+    const effectRan = useRef(false)
     
     const { user, isAuthenticated, isLoading } = useAuth0();
 
     // This is the initial call to find the user id
-
     if(user){
 
         fetch(`http://localhost:3000/users/${user["sub"]}`)
@@ -38,16 +38,31 @@ const Profile = () => {
         .then(result => SetProfilePhoto(result.image_url))
         .catch(error => console.log(error))
         
-        if(profiles){
-            return null;
-        }else{ 
-        fetch(`http://localhost:3000/profiles/${user["sub"]}`)
-        .then(response => response.json())
-        .then(result => SetProfiles(result))
-        .catch(error => console.log(error))}
+        // if(profiles){
+        //     return null;
+        // }
+        // else if(profiles.length == 0){
+        //     fetch(`http://localhost:3000/profiles/${result[0].id}`)
+        //     .then(response => response.json())
+        //     .then(result => console.log(result))
+        //     .catch(error => console.log(error))
+        // }
+        // else{ 
+        
+    // }
        
     }
-
+   
+    //this is me trying to avoid constant Get requests using a useEffect
+    useEffect(()=>{
+        
+            fetch(`http://localhost:3000/articles`)
+            .then(response => response.json())
+            .then(result => SetProfiles(result))
+            .catch(error => console.log(error))
+        
+       
+    },[])
 
     const upLoadFile = (e) =>{
         
@@ -88,13 +103,17 @@ const Profile = () => {
 
     //render the profile cards
     const makeProfiles = () =>{
-        return profiles.map( article=>{
-            // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
-         
-          return <ArticleCard className = "Profile-article-card" title = {article.title} key = {article.title} id = {article.id} sample = {article["sample_text"]} author = {article["author"]}/>
-        })
+        if(profiles){
+            return profiles.map( article=>{
+                // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
+             if (article.user_id == userId){
+              return <ArticleCard className = "Profile-article-card" title = {article.title} key = {article.title} id = {article.id} sample = {article["sample_text"]} author = {article["author"]}/>
+             }
+            })
+        }
+        
     }
-    
+    console.log(userId)
     return (
 
     <div>

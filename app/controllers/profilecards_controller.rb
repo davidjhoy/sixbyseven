@@ -1,6 +1,6 @@
 class ProfilecardsController < ApplicationController
     def index
         
-        render json: Article.where(ClientID: params[:id]).limit(10), status: :ok
+        render json: Article.where(user_id: params[:id].split(',')), status: :ok
     end
 end

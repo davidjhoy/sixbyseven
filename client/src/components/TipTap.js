@@ -144,13 +144,14 @@ export default () => {
         "likes": 10,
         "tiptap": json,
         "title": ArticleTitle,
-        "user_id":response[0]["id"],
-        "ClientID": user.sub
+        "user_id":response.id,
+        "ClientID": response.ClientID,
+        "ImageUrl": response.image_url
         
     }),
       redirect: "follow"
        })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
 
@@ -159,14 +160,19 @@ export default () => {
  
   const PublishEvent = () => {
    
-    
-    
     fetch(`http://localhost:3000/users/${user.sub}`)
     .then(response => response.json())
-    .then(res => CreateArticle(res))
+    .then(res => IntermediateFetch(res))
     .catch(error => console.log('error', error));
           
       }
+
+  const IntermediateFetch = (result) => {
+    fetch(`http://localhost:3000/userc/${result[0].id}`)
+        .then(response => response.json())
+        .then(result => CreateArticle(result))
+        .catch(error => console.log(error))
+  }
 
      
 

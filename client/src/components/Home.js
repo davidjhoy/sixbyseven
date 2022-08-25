@@ -32,7 +32,7 @@ const Home = () => {
    return articleList.map( article=>{
       // <ArticleCard id = {article.title} sample = {article.sample_text} title = {article.title} />
    
-    return <ArticleCard className = "Home-article-card" title = {article.title} sample = {article["sample_text"]} key = {article["sample_text"]} id = {article.id} author = {article["author"]}/>
+    return <ArticleCard className = "Home-article-card" title = {article.title} sample = {article["sample_text"]} key = {article["sample_text"]} id = {article.id} author = {article["author"]} imageUrl = {article["ImageUrl"]}/>
     }
    )
   }

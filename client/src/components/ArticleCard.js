@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/articleCard.css';
 import { useNavigate } from "react-router-dom";
 
-const ArticleCard = ({sample, title, id, author}) => {
+const ArticleCard = ({sample, title, id, author, imageUrl}) => {
   const navigate = useNavigate()
 
 
@@ -14,7 +14,7 @@ const ArticleCard = ({sample, title, id, author}) => {
   return (
     <div className = "ArticleCard" onClick = {CardClick} >
       <div className = "ProfileStuff">
-        <div className = "ImageWrapper"></div>
+        <div className = "ImageWrapper"><img src ={imageUrl} id = "ArticleProfileImage" /></div>
         <div className = "UserTitle"><h3>{author}</h3></div>
       </div>
       <div className = "Sample">
