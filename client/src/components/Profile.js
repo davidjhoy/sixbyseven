@@ -12,7 +12,9 @@ const Profile = () => {
     const [profileImage, SetProfileImage] = useState("")
     const [userId, SetUserId] = useState("")
     const [profilePhoto, SetProfilePhoto] = useState("")
+    const [UserName, SetUserName] = useState("")
     const effectRan = useRef(false)
+
     
     const { user, isAuthenticated, isLoading } = useAuth0();
 
@@ -113,7 +115,32 @@ const Profile = () => {
         }
         
     }
-    console.log(userId)
+    
+
+    //UserName Stuff
+    const handleUserName = (e) =>{
+        SetUserName(e.target.value)
+    }
+
+    const UpLoadUserName = (e) =>{
+        e.preventDefault();
+        fetch(`http://localhost:3000/users/${userId}`, {
+                     method: "PATCH",
+                     mode: 'cors',
+                     headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin" : "*", 
+                        "Access-Control-Allow-Credentials" : true 
+                         },
+                     body: JSON.stringify({
+                        "name": UserName
+                     }),
+                     redirect: "follow"
+                       })
+                      .then(response => response.json())
+                      .then(result => console.log(result))
+                      .catch(error => console.error(error));
+    }
     return (
 
     <div>
@@ -133,6 +160,14 @@ const Profile = () => {
                 <input type = "file" name = "image" id = "image"  onChange = {handleImageChange}/>
                 <button type ="submit" id = "PhotoSubmit">Submit Photo</button>
                 </form>
+                
+                <div id = "UserNameDiv">
+                <form className = "UserNameForm" onSubmit = {(e)=> UpLoadUserName(e)} >
+                <p id = "UserNameTitle">Edit UserName</p>
+                <input type = "text" name = "UserName" id = "UserName"  onChange = {handleUserName}/>
+                <button type ="submit" id = "UserNameSubmit">Submit UserName</button>
+                </form>
+                </div>
             </div>
         </div>
     </div>

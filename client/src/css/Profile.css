@@ -75,9 +75,42 @@
     font-weight: 600;
     background-color: rgba(157, 154, 154, 0.309);
     margin-top: 5%;
+    
 }
 
 #ProfilePhoto{
     height: 100px;
     width: 100px;
+}
+
+
+
+.UserNameForm{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 2%
+}
+
+#UserNameTitle{
+    margin-top: 0%;
+    font-weight: 400;
+    padding-bottom: 0%;
+}
+
+#UserNameSubmit{
+    border-radius: 0%;
+    height: auto;
+    width: auto;
+    margin-top: 2%;
+    margin-left: 0%;
+    align-self: flex-start;
+}
+
+#UserNameDiv{
+    display: flex;
+    
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
 }

@@ -146,7 +146,8 @@ export default () => {
         "title": ArticleTitle,
         "user_id":response.id,
         "ClientID": response.ClientID,
-        "ImageUrl": response.image_url
+        "ImageUrl": response.image_url,
+        "author": response.name
         
     }),
       redirect: "follow"
